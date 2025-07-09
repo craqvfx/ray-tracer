@@ -38,9 +38,12 @@ int main()
     auto pixel_delta_u = viewport_u / image_width;
     auto pixel_delta_v = viewport_v / image_height;
 
-    // Calculate the location of the uper left pixel.
-    auto viewport_upper_left = camera_center - vec3(0, 0, focal_length) - viewport_u / 2 - viewport_v / 2;
-    auto pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
+    // Calculate the location of the upper left pixel.
+    auto viewport_upper_left = camera_center
+                            - vec3(0, 0, focal_length)   // Move forward to the image plane.
+                            - viewport_u / 2            // Move left to the left edge.
+                            - viewport_v / 2;           // Move up to the top edge.
+    auto pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v); // Move to center of top left pixel (half a pixel down and half a pixel left). Doesn't move it along z axis at all as pixel_delta_... both have 0 as their z value.
 
     // Open file for output
     std::ofstream out("image.ppm");
@@ -48,13 +51,13 @@ int main()
     // Render ppm image
 
     out << "P3\n" << image_width << ' ' << image_height << "\n255\n";
-    for (int i = 0; i < image_height; i++)
+    for (int j = 0; j < image_height; j++)
     {
-        std::clog << "\rScanlines remaining: " << (image_height - i) <<  ' ' << std::flush;
+        std::clog << "\rScanlines remaining: " << (image_height - j) <<  ' ' << std::flush;
 
-        for (int j = 0; j < image_width; j++) 
+        for (int i = 0; i < image_width; i++) 
         {
-            auto pixel_center = pixel00_loc + (i * pixel_delta_u) + (j*pixel_delta_v);
+            auto pixel_center = pixel00_loc + (i * pixel_delta_u) + (j * pixel_delta_v);
             auto ray_direction = pixel_center - camera_center;
             ray r(camera_center, ray_direction);
 
