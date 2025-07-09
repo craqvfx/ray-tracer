@@ -9,3 +9,11 @@ Has alias point3
 
 ### color.h
 Has one function write_color which takes a pixel and writes its rgb values in PPM format
+
+### ray.h
+Represents actual ray used for tracing
+
+#### at(t) function explained
+Position along the ray at a given time can be given as:
+'Position(time) = origin + (time * direction)'
+Where origin and direction are inherent properties of the ray, and time is a real value.
