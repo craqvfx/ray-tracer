@@ -91,7 +91,7 @@ inline vec3 operator*(double t, const vec3& v) // Allows for reverse (t * v aswe
     return t * v;
 }
 
-inline vec3 operator/(double t, const vec3& v)
+inline vec3 operator/(const vec3& v, double t)
 {
     return (1/t) * v;
 }
