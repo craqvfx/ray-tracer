@@ -1,5 +1,8 @@
 # Ray tracer
 
+## Disclaimer
+This project was made using the help of the [Ray Tracing in One Weekend Book Series]{https://github.com/RayTracing/raytracing.github.io/}. While all of the code is provided in the afore-linked github repository, I typed everything by hand and have implemeneted some features of my own, as is hopefully demonstrated by the commit history.
+
 ## Code
 ### vec3.h
 3D vector class for storing geometric vectors. Can be used for locations, colours, directions, offsets, etc.
