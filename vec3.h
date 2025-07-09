@@ -1,4 +1,4 @@
-#ifndef VEC3_H //include guard, prevents multiple includes by ifndef (if not defined)
+#ifndef VEC3_H // Include guard, prevents multiple includes by ifndef (if not defined).
 #define VEC3_H
 
 #include <cmath>
@@ -9,19 +9,19 @@ class vec3
     public:
         double e[3];
 
-        //constructors
+        // Constructors
         vec3() : e{0,0,0} {}
         vec3(double e0, double e1, double e2) : e{e0, e1, e2} {}
 
-        //getters
+        // Getters
         double x() const { return e[0]; }
         double y() const { return e[1]; }
         double z() const { return e[2]; }
 
-        //operators
-        vec3 operator-() const {return vec3(-e[0], -e[1], -e[2]); } //allows unary - operator (use of -v for negation)
-        double operator[](int i) const { return e[i]; } //allows v[n] to get elements (when vec3 is constant). Returns copy (double)
-        double& operator[](int i) { return e[i]; } //allows v[n] to get or set elements. Returns reference (double&)
+        // Operators
+        vec3 operator-() const {return vec3(-e[0], -e[1], -e[2]); } // Allows unary - operator (use of -v for negation).
+        double operator[](int i) const { return e[i]; } // Allows v[n] to get elements (when vec3 is constant). Returns copy (double).
+        double& operator[](int i) { return e[i]; } // Allows v[n] to get or set elements. Returns reference (double&).
 
         vec3& operator+=(const vec3& v)
         {
@@ -55,7 +55,7 @@ class vec3
         }
 };
 
-// point3 is just an alias for vec3, but useful for geometric clarity in the code
+// Point3 is just an alias for vec3, but useful for geometric clarity in the code.
 using point3 = vec3;
 
 // Vector utility functions
@@ -85,7 +85,7 @@ inline vec3 operator*(const vec3& v, double t)
     return vec3(t * v.e[0], t * v.e[1], t * v.e[2]);
 }
 
-inline vec3 operator*(double t, const vec3& v) // allows for revese (t * v aswell as v * t) by implicitly calling 'inline vec3 operator*(const vec3& v, double t)'
+inline vec3 operator*(double t, const vec3& v) // Allows for reverse (t * v aswell as v * t) by implicitly calling 'inline vec3 operator*(const vec3& v, double t)'.
 
 {
     return t * v;
@@ -115,4 +115,4 @@ inline vec3 unit_vector(const vec3& v)
     return v / v.length();
 }
 
-#endif //end if statement started at top by #ifndef VEC3_H
+#endif // End if statement started at top by #ifndef VEC3_H.
