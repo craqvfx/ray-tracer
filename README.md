@@ -1,6 +1,6 @@
 # Ray tracer
 
-Major TO-DOs:
+## Major TO-DOs:
 - Add GUI<br>
 - Output to PNG or similar format instead of PPM<br>
 
@@ -19,7 +19,7 @@ Has one function write_color which takes a pixel and writes its rgb values in PP
 
 ### ray.h
 Defines ray class that stores information about the ray and has an at(t) function to give the position along that ray at a given time/offset.<br>
-Stores the following information about a ray:
+#### Stores the following information about a ray:
 - Origin<br>
 - Direction<br>
 
@@ -28,11 +28,31 @@ Position along the ray at a given time/offset can be given as:<br>
 `Position(time) = origin + (time * direction)`<br>
 Where origin is a 3D vector representing position, direction is a 3D unit vector, and time is a real value.
 
+### camera.h
+Defines a class that contains information about the camera all the functionality of the camera.<br>
+It should be constructed with no arguments, then the owning code will modify the camera's public variables through simple assignment, then the owning code should call the render function, passing in a world.<br>
+This pattern is chosen instead of the owner calling a constructor with a ton of parameters or by defining and calling a bunch of setter methods. Instead, the owning code only needs to set what it explicitly cares about.<br>
+
+#### Stores the following information about a camera:
+##### public:
+- Aspect ratio<br>
+- Image width
+##### private:
+- Aspect ratio<br>
+- Image width
+
+#### Has the following procedures:
+##### public:
+- Render
+##### private:
+- Initialize (run at the beginning of every render)<br>
+- Ray color
+
 ### hittable.h
 #### hittable abstract class
-Defines abstract class for all objects which should be hittable to inherit from
+Defines abstract class for all objects which should be hittable to inherit from.
 #### hit_record class
-Stores the following information about a hit:
+#### Stores the following information about a hit:
 - Point<br>
 - Normal<br>
 - t (time/offset at which ray intersects object)<br>
@@ -47,11 +67,11 @@ Defines sphere class that inherets from hittable.h
 
 ### interval.h
 Defines interval class that stores information about a real-valued interval and has procedures to get information about that data.<br>
-Stores the following information about an interval:
+#### Stores the following information about an interval:
 - min<br>
 - max<br>
 
-Has the following public procedures:
+#### Has the following public procedures:
 - size<br>
 - contains<br>
 - surrounds<br>
