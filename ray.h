@@ -1,6 +1,8 @@
 #ifndef RAY_H
 #define RAY_H
 
+#include "ray_tracer.h"
+
 #include "vec3.h"
 
 class ray
