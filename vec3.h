@@ -1,9 +1,6 @@
 #ifndef VEC3_H // Include guard, prevents multiple includes by ifndef (if not defined).
 #define VEC3_H
 
-#include <cmath>
-#include <iostream>
-
 class vec3
 {
     public:
