@@ -44,3 +44,14 @@ Uses shared_ptr to allow for instances and easier memory management.
 
 ### sphere.h
 Defines sphere class that inherets from hittable.h
+
+### interval.h
+Defines interval class that stores information about a real-valued interval and has procedures to get information about that data.<br>
+Stores the following information about an interval:
+- min<br>
+- max<br>
+
+Has the following public procedures:
+- size<br>
+- contains<br>
+- surrounds<br>
