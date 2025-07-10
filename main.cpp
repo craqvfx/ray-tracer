@@ -9,7 +9,7 @@
 color ray_color(const ray &r, const hittable& world)
 {
     hit_record rec;
-    if (world.hit(r, 0, INFINITY, rec))
+    if (world.hit(r, interval(0, INFINITY), rec))
     {
         return 0.5 * (rec.normal + color(1,1,1));
     }
@@ -37,6 +37,7 @@ int main()
     
     world.add(make_shared<sphere>(point3(0,0,-1), 0.5));
     world.add(make_shared<sphere>(point3(0, -100.5, -1), 100));
+
     // Camera
 
     auto focal_length = 1.0;
@@ -55,8 +56,8 @@ int main()
     // Calculate the location of the upper left pixel.
     auto viewport_upper_left = camera_center
                             - vec3(0, 0, focal_length)   // Move forward to the image plane.
-                            - viewport_u / 2            // Move left to the left edge.
-                            - viewport_v / 2;           // Move up to the top edge.
+                            - viewport_u / 2             // Move left to the left edge.
+                            - viewport_v / 2;            // Move up to the top edge.
     auto pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v); // Move to center of top left pixel (half a pixel down and half a pixel left). Doesn't move it along z axis at all as pixel_delta_... both have 0 as their z value.
 
     // Open file for output
