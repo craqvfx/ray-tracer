@@ -38,5 +38,9 @@ Stores the following information about a hit:
 - t (time/offset at which ray intersects object)<br>
 - Front face<br>
 
+### hittable_list.h
+Stores a list of hittable objects.
+Uses shared_ptr to allow for instances and easier memory management.
+
 ### sphere.h
 Defines sphere class that inherets from hittable.h
