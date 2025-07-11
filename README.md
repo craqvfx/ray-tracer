@@ -36,10 +36,15 @@ This pattern is chosen instead of the owner calling a constructor with a ton of 
 #### Stores the following information about a camera:
 ##### public:
 - Aspect ratio<br>
-- Image width
+- Image width<br>
+- Samples per pixel
 ##### private:
-- Aspect ratio<br>
-- Image width
+- Image height<br>
+- Color scale factor for a sum of pixels (pixel_samples_scale - To facilitate multiple samples, we add the full color from each sample, and then divide by the number of samples)<br>
+- Camera center<br>
+- Location of pixel (0, 0)<br>
+- Offset to pixel to the right (delta u)<br>
+- Offset to pixel below (delta v)<br>
 
 #### Has the following procedures:
 ##### public:
