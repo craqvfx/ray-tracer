@@ -15,7 +15,7 @@ Stores each value as a double<br>
 Has alias point3
 
 ### color.h
-Has one function write_color which takes a pixel and writes its rgb values in PPM format
+Takes a pixel and writes its rgb values in PPM format, converting from linear to gamma 2.
 
 ### ray.h
 Defines ray class that stores information about the ray and has an at(t) function to give the position along that ray at a given time/offset.<br>
