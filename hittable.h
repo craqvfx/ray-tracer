@@ -19,7 +19,7 @@ class hit_record
         // Sets the hit record normal vector.
         // NOTE: the parameter `outward_normal` is assumed to have unit length.
 
-        front_face = dot(r.direction(), outward_normal) , 0;
+        front_face = dot(r.direction(), outward_normal) < 0;
         normal = front_face ? outward_normal : -outward_normal;
     }
 };
