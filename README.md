@@ -4,8 +4,8 @@
 - Add GUI<br>
 - Output to PNG or similar format instead of PPM<br>
 
-## Disclaimer
-This project was made using the help of the [Ray Tracing in One Weekend Book Series](https://github.com/RayTracing/raytracing.github.io/). While all of the code is provided in the afore-linked github repository, I typed everything by hand and have implemented some features of my own, as is hopefully demonstrated by the commit history.
+## Disclosure
+This project was made using the help of the [Ray Tracing in One Weekend Book Series](https://github.com/RayTracing/raytracing.github.io/). While much of the code is provided in the afore-linked github repository, I typed everything by hand and have implemented features of my own, as is hopefully demonstrated by the commit history.
 
 ## Code
 ### vec3.h
@@ -37,7 +37,12 @@ This pattern is chosen instead of the owner calling a constructor with a ton of 
 ##### public:
 - Aspect ratio<br>
 - Image width<br>
-- Samples per pixel
+- Samples per pixel<br>
+- Max depth of ray bounces<br>
+- Vertical view angle (vertical field of view)<br>
+- Point camera is looking from<br>
+- Point camera is looking at<br>
+- Camera-relative "up" direction
 ##### private:
 - Image height<br>
 - Color scale factor for a sum of pixels (pixel_samples_scale - To facilitate multiple samples, we add the full color from each sample, and then divide by the number of samples)<br>
@@ -45,13 +50,19 @@ This pattern is chosen instead of the owner calling a constructor with a ton of 
 - Location of pixel (0, 0)<br>
 - Offset to pixel to the right (delta u)<br>
 - Offset to pixel below (delta v)<br>
+- Camera frame basis vectors (u, v, w)<br>
+- Defocus disk horizontal radius<br>
+- Defocus disk vertical radius<br>
 
 #### Has the following procedures:
 ##### public:
 - Render
 ##### private:
 - Initialize (run at the beginning of every render)<br>
-- Ray color
+- Get ray (Construct a camera ray originating from the defocus disk and directed at randomly sampled point around the pixel location i, j.)<br>
+- Sample square (Returns the vector to a random point in the [-.5,-.5]-[+.5,+.5] unit square.)<br>
+- Defocus disk sample (Returns a random point in the camera defocus disk.)<br>
+- Ray color (Returns color of a ray)<br>
 
 ### hittable.h
 #### hittable abstract class
@@ -61,22 +72,24 @@ Defines abstract class for all objects which should be hittable to inherit from.
 - Point<br>
 - Normal<br>
 - t (time/offset at which ray intersects object)<br>
-- Front face<br>
+- Whether it is a front face<br>
 
 ### hittable_list.h
 Stores a list of hittable objects.
 Uses shared_ptr to allow for instances and easier memory management.
-
+#### Has the following public procedures:
+- Add (an object)
+- Hit (whether a ray hits anything)
 ### sphere.h
 Defines sphere class that inherets from hittable.h
 
 ### interval.h
 Defines interval class that stores information about a real-valued interval and has procedures to get information about that data.<br>
 #### Stores the following information about an interval:
-- min<br>
-- max<br>
+- Min point<br>
+- Max point<br>
 
 #### Has the following public procedures:
-- size<br>
-- contains<br>
-- surrounds<br>
+- Size<br>
+- Contains<br>
+- Surrounds<br>
